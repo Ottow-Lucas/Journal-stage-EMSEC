@@ -1,6 +1,6 @@
-** Liste des Articles / Cours lus pendant le stage et ce que j'y ai appris
+* Liste des articles et cours lus pendant le stage | résumé de ce que j'y ai appris
 
-* 1 - Cours d'introduction à la cryptographie de L3 - Adeline Roux Langlois (voir documents persos) 
+** 1 - Cours d'introduction à la cryptographie de L3 - Adeline Roux Langlois (voir documents persos) 
 - notion de sécurité CPA (l'attaquant, en regardant un chiffré, ne peut pas recuperer d'information non négligeable sur le message d'origine)
 - notion de sécurité CCA (l'attaquant, en pouvant décoder des messages autre que le challenge, ne peut pas savoir d'informations non négligeable sur le message d'origine)
 - gaussienne discrete sur Z et le fait que les valeurs sont presques toutes de norme faible (pour une gaussienne de parametre s, autour de s*sqrt(n) )
@@ -12,27 +12,39 @@
 - découverte d'une focntion de hachage reposant sur SIS ( x est le message a coef dans 0 et 1 (donc court), la fonction renvoie Ax mod q )
 - découverte des schémas de signature ( schémas qui permettent de prouver l'identité d'une personne, la clé secrete encrypte et celle publique décrypte)
 
-* 2 - Cours d'introduction à la cryptographie dur les réseaux euclidiens - Adeline Roux Langlois (voir documents persos)
+** 2 - Cours d'introduction à la cryptographie sur les réseaux euclidiens - Adeline Roux Langlois (voir documents persos)
 - notions de base sur un réseau euclidien ( bases, premier minimim, dernier minimum, théorèmes de minkowski )
-- introduction aux problèmes SVP, CVP et à leur variantes approchées ( étant dnné une base d'un réseau, donné le vecteur non nul le pluspetit du réseau ou le plus proche d'un point donné)
-- search SVP et decisional SVP ( avec search SVP, decisional SVP est résolvable. Avec decisional SVP, on fait une recherche dichotomique entre ||B|| et 0 pour trouver la dist entre le point et le réseau,
-puis on utilise decisional SVp pour savoir dans quel sous réseau le vecteur se trouve. Une fois qu'on a un sous réseau exponentiellement plus dilaté que celui de base, on peut appliquer un algorithme poly
-qui trouve le veteur le plus proche avec une facteur d'approx exponentiel)
-- il existe une réduction de GapSVP à GapCVP (on appelle GapCVP sur les réseau B_i où ou a multiplié par deux le vecteur b_i et pour cicble b_i. Si on a une instance NON, les instances de GapCVP aussi. Si on a
-une instance OUI, on a un vecteur v tq ||v+b_i-b_i||<=r et v+b_i est dans B_i donc on a une instance OUI de GapCVP )
-- Complexité de GapSVp (GapCVP_\gamma est NP dur pour \gamma constant, NP \inter coNP pour gamma = sqrt(n), et difficile pour \gamma = poly(n). Pour \gamma = 2^O(n), il y a un algo poly)
+- introduction aux problèmes SVP, CVP et à leur variantes approchées ( étant donné une base d'un réseau, trouver le vecteur non nul le plus petit du réseau ou le plus proche d'un point donné)
+- search SVP et decisional SVP ( avec search SVP, decisional SVP est résolvable. Avec decisional SVP, on fait une recherche dichotomique entre ||B|| et 0 pour trouver la dist entre le point et le réseau, puis on utilise decisional SVP pour savoir dans quel sous réseau le vecteur se trouve. Une fois qu'on a un sous réseau exponentiellement plus dilaté que celui de base, on peut appliquer un algorithme poly qui trouve le veteur le plus proche avec une facteur d'approx exponentiel)
+- il existe une réduction de GapSVP à GapCVP (on appelle GapCVP sur les réseau B_i où ou a multiplié par deux le vecteur b_i et pour cicble b_i. Si on a une instance NON, les instances de GapCVP aussi. Si on a une instance OUI, on a un vecteur v tq ||v+b_i-b_i||<=r et v+b_i est dans B_i donc on a une instance OUI de GapCVP )
+- Complexité de GapSVP (GapCVP_\gamma est NP dur pour \gamma constant, NP \inter coNP pour gamma = sqrt(n), et difficile pour \gamma = poly(n). Pour \gamma = 2^O(n), il y a un algo poly)
 - introduction au réseau dual ( l'ens des point formant un pdt scalaire entier avec les pt du réseau )
 - inégalité plus générale sur les gaussiennes (pour une gaussienne de parametre s, proba que le vecteur soit >= s*t est inférieur à exp(-\pi*t^2) )
 - introduction du smoothing parameter (qui permet d'avoir certaines ptés de la gausienne discrete sur la gausienne continue)
 - pour un parametre suffisament grand, la gausienne modulo un sous réseau est indistingable de la proba uniforme modulo le sous réseau.
-- On peut echantilonner la gausienne discrette sur un réseau donné ( pourvu que s soit assez grand ) (voir papier n°X)
+- On peut echantilonner la gausienne discrette sur un réseau donné ( pourvu que s soit assez grand ) (voir papier n°3)
 - découverte du problème SIVP (étant donné un réseau trouver n vecteurs cours indépendants)
-- il existe une réduction de SIVP à SIS ( on echantillonne n vecteurs de la gausienne que l'on transforme en probleme SIS; puisque les vecteurs echantilonnés sont courts, on obtient un vecteur qui est
-toujours sur le réseau mais plus petit, on répete ca pour obtenir un ensemble de vecteur linéairement indep puis on réitère laprocédure jusqu'à avoir un des vecteurs sufisament petits)
-- search LWE et decisional LWE sont équivalents ( pour résoudre search en ayant decisional, on devine chaque coordonnée une à une; si on tombe sur la bonne, on a une distribution de LWE, sinon on a une distribution
-uniforme )
-- il existe une réduction quantique de GapSVP à LWE ( voir présentation de Regev )
+- il existe une réduction de SIVP à SIS ( on echantillonne n vecteurs de la gausienne que l'on transforme en probleme SIS; puisque les vecteurs echantilonnés sont courts, on obtient un vecteur qui est toujours sur le réseau mais plus petit, on répete ca pour obtenir un ensemble de vecteur linéairement indep puis on réitère laprocédure jusqu'à avoir un des vecteurs sufisament petits)
+- search LWE et decisional LWE sont équivalents ( pour résoudre search en ayant decisional, on devine chaque coordonnée une à une; si on tombe sur la bonne, on a une distribution de LWE, sinon on a une distribution uniforme )
+- il existe une réduction quantique de GapSVP à LWE ( voir présentation n°4 )
 - découverte du chiffrement dual Regev (au lieu que la clé privée est r (coef dans 0 et 1) et la clé publique est y =r^TA  mod q (donc la clé secrete n'est plus s) 
-- definition d'une trappe pour les problèmes de réseau (base courte de \Lambda_q^\bot(A), avec laquelle on peut résoudre beaucoup de problemes compliqués facilement )
+- definition d'une trappe pour les problèmes de réseau (base courte de \Lambda_q^\bot(A), avec laquelle on peut résoudre beaucoup de problemes compliqués facilement et echantillonner la gausienne avec un parametre petit ) (voir papier n°3)
 - il est possible de générer une trappe en meme temps qu'une matrice, et de faire en sorte que la matrice soit proche de l'uniforme
+- découverte du schéma de signature GPV, dont la sécurité repose sur SIS ( utiliser une trappe pour generer un vecteur avec une certaine prorpiété (compliqué à faire sans la trappe), pour vérifier, on a juste à verifier si le vecteur respecte la bonne pté )
+- on peut construire des réseaux avec des coefs dans un anneau de polynome (typiquement, Z[X]/(X**n+1) ) pour avoir des multiplication un peu plus efficace. Malheureusement, certains problèmes standards sur les réseaux n'ont pas été prouvés comme durs ( voir présentation n°6)
+
+** 3 - How to Use a Short Basis: Trapdoors for Hard Lattices and New Cryptographic Constructions - Gentry, Peikert et Vaikuntanathan ( https://eprint.iacr.org/2007/432.pdf )
+- découverte de la notion d'IBE ( un systeme où une clé publique permet d'encrypter un message pour tout le monde, et une clé secrete permet de generer une clé secrete pour chaque utilisateur )
+- l'article explique comment échantillonner la gausienne discrete sur Z ( en sachant qu'avec une proba de type 1-negl, l'echantillon est dans [c-s*log(n),c+log(n)], on peut appliquer ue méthode de rejet sur cet intervalle pour obtenir un echantillon gaussien)
+- à l'aide de cette gausienne, on peut echantillonner celle sur un réseau quelconque ( il s'agit d'une méthode utilisant les vecteurs de Gramm-Schmitt de la base )
 - 
+
+** 4 - Proving Hardness of LWE - Regev ( présentation d'article en vidéo : https://www.youtube.com/watch?v=Z4DM3qhH6pA et  https://people.csail.mit.edu/vinodv/6892-Fall2013/regev.pdf )
+
+** 5 - The Mathematics of Latices - Vaikuntanathan ( https://www.youtube.com/watch?v=LlPXfy6bKIY et https://www.youtube.com/watch?v=SZkTJMorxnM ) 
+
+** 6 - Présentation sur Ring-LWE - Lyubashevsky ( https://www.youtube.com/watch?v=okJwRM0Yu7E )
+
+** 7 - Lattice-based Cryptography - Micciancio et Regev ( https://cseweb.ucsd.edu/~daniele/papers/PostQuantum.pdf )
+
+** 8 - Robustness of the Learning with Errors Assumption - Goldwasser, Kalai, Peikert et Vaikuntanathan ( https://web.eecs.umich.edu/~cpeikert/pubs/robustlwe.pdf )
