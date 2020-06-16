@@ -1,0 +1,38 @@
+** Liste des Articles / Cours lus pendant le stage et ce que j'y ai appris
+
+* 1 - Cours d'introduction à la cryptographie de L3 - Adeline Roux Langlois (voir documents persos) 
+- notion de sécurité CPA (l'attaquant, en regardant un chiffré, ne peut pas recuperer d'information non négligeable sur le message d'origine)
+- notion de sécurité CCA (l'attaquant, en pouvant décoder des messages autre que le challenge, ne peut pas savoir d'informations non négligeable sur le message d'origine)
+- gaussienne discrete sur Z et le fait que les valeurs sont presques toutes de norme faible (pour une gaussienne de parametre s, autour de s*sqrt(n) )
+- découverte du problème LWE calculatoire et décisionnel (on a m pdt scalaires avec un vecteur secret s de Z^n, les pdt sont brouillés par une gaussienne discrete)
+- découverte d'un chiffrement reposant sur LWE ( en recevant (A,b) en clé publique, on echantillone r avec des valeurs 0 ou 1 puis on renvoie (r^TA,r^Tb+floor(q/2)*M) )
+- énoncé du Leftover Hash Lemma (si une matrice et un vecteur sont choisis de manière uniforme, leur produit est a distance négligeable de la distribution uniforme)
+- notion de résistance aux colisions (un adversaire ne peut pas renvoyer une colision pour la fonction de hash avec une proba non négligeable )
+- découverte du problème SIS ( pour une matrice a coef entier, trouver un vecteur petit de \Lambda_T (A) )
+- découverte d'une focntion de hachage reposant sur SIS ( x est le message a coef dans 0 et 1 (donc court), la fonction renvoie Ax mod q )
+- découverte des schémas de signature ( schémas qui permettent de prouver l'identité d'une personne, la clé secrete encrypte et celle publique décrypte)
+
+* 2 - Cours d'introduction à la cryptographie dur les réseaux euclidiens - Adeline Roux Langlois (voir documents persos)
+- notions de base sur un réseau euclidien ( bases, premier minimim, dernier minimum, théorèmes de minkowski )
+- introduction aux problèmes SVP, CVP et à leur variantes approchées ( étant dnné une base d'un réseau, donné le vecteur non nul le pluspetit du réseau ou le plus proche d'un point donné)
+- search SVP et decisional SVP ( avec search SVP, decisional SVP est résolvable. Avec decisional SVP, on fait une recherche dichotomique entre ||B|| et 0 pour trouver la dist entre le point et le réseau,
+puis on utilise decisional SVp pour savoir dans quel sous réseau le vecteur se trouve. Une fois qu'on a un sous réseau exponentiellement plus dilaté que celui de base, on peut appliquer un algorithme poly
+qui trouve le veteur le plus proche avec une facteur d'approx exponentiel)
+- il existe une réduction de GapSVP à GapCVP (on appelle GapCVP sur les réseau B_i où ou a multiplié par deux le vecteur b_i et pour cicble b_i. Si on a une instance NON, les instances de GapCVP aussi. Si on a
+une instance OUI, on a un vecteur v tq ||v+b_i-b_i||<=r et v+b_i est dans B_i donc on a une instance OUI de GapCVP )
+- Complexité de GapSVp (GapCVP_\gamma est NP dur pour \gamma constant, NP \inter coNP pour gamma = sqrt(n), et difficile pour \gamma = poly(n). Pour \gamma = 2^O(n), il y a un algo poly)
+- introduction au réseau dual ( l'ens des point formant un pdt scalaire entier avec les pt du réseau )
+- inégalité plus générale sur les gaussiennes (pour une gaussienne de parametre s, proba que le vecteur soit >= s*t est inférieur à exp(-\pi*t^2) )
+- introduction du smoothing parameter (qui permet d'avoir certaines ptés de la gausienne discrete sur la gausienne continue)
+- pour un parametre suffisament grand, la gausienne modulo un sous réseau est indistingable de la proba uniforme modulo le sous réseau.
+- On peut echantilonner la gausienne discrette sur un réseau donné ( pourvu que s soit assez grand ) (voir papier n°X)
+- découverte du problème SIVP (étant donné un réseau trouver n vecteurs cours indépendants)
+- il existe une réduction de SIVP à SIS ( on echantillonne n vecteurs de la gausienne que l'on transforme en probleme SIS; puisque les vecteurs echantilonnés sont courts, on obtient un vecteur qui est
+toujours sur le réseau mais plus petit, on répete ca pour obtenir un ensemble de vecteur linéairement indep puis on réitère laprocédure jusqu'à avoir un des vecteurs sufisament petits)
+- search LWE et decisional LWE sont équivalents ( pour résoudre search en ayant decisional, on devine chaque coordonnée une à une; si on tombe sur la bonne, on a une distribution de LWE, sinon on a une distribution
+uniforme )
+- il existe une réduction quantique de GapSVP à LWE ( voir présentation de Regev )
+- découverte du chiffrement dual Regev (au lieu que la clé privée est r (coef dans 0 et 1) et la clé publique est y =r^TA  mod q (donc la clé secrete n'est plus s) 
+- definition d'une trappe pour les problèmes de réseau (base courte de \Lambda_q^\bot(A), avec laquelle on peut résoudre beaucoup de problemes compliqués facilement )
+- il est possible de générer une trappe en meme temps qu'une matrice, et de faire en sorte que la matrice soit proche de l'uniforme
+- 
