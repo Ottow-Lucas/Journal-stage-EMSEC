@@ -1,4 +1,4 @@
-* Liste des articles et cours lus pendant le stage | résumé de ce que j'y ai appris
+* Liste des articles et cours lus pendant le stage et résumé de ce que j'y ai appris
 
 ** 1 - Cours d'introduction à la cryptographie de L3 - Adeline Roux Langlois (voir documents persos) 
 - notion de sécurité CPA (l'attaquant, en regardant un chiffré, ne peut pas recuperer d'information non négligeable sur le message d'origine)
@@ -17,7 +17,7 @@
 - introduction aux problèmes SVP, CVP et à leur variantes approchées ( étant donné une base d'un réseau, trouver le vecteur non nul le plus petit du réseau ou le plus proche d'un point donné)
 - search SVP et decisional SVP ( avec search SVP, decisional SVP est résolvable. Avec decisional SVP, on fait une recherche dichotomique entre ||B|| et 0 pour trouver la dist entre le point et le réseau, puis on utilise decisional SVP pour savoir dans quel sous réseau le vecteur se trouve. Une fois qu'on a un sous réseau exponentiellement plus dilaté que celui de base, on peut appliquer un algorithme poly qui trouve le veteur le plus proche avec une facteur d'approx exponentiel)
 - il existe une réduction de GapSVP à GapCVP (on appelle GapCVP sur les réseau B_i où ou a multiplié par deux le vecteur b_i et pour cicble b_i. Si on a une instance NON, les instances de GapCVP aussi. Si on a une instance OUI, on a un vecteur v tq ||v+b_i-b_i||<=r et v+b_i est dans B_i donc on a une instance OUI de GapCVP )
-- Complexité de GapSVP (GapCVP_\gamma est NP dur pour \gamma constant, NP \inter coNP pour gamma = sqrt(n), et difficile pour \gamma = poly(n). Pour \gamma = 2^O(n), il y a un algo poly)
+- Complexité de GapSVP (GapCVP_\gamma est NP dur pour \gamma constant, NP \cap coNP pour \gamma = sqrt(n), et difficile pour \gamma = poly(n). Pour \gamma = 2^O(n), il y a un algo poly)
 - introduction au réseau dual ( l'ens des point formant un pdt scalaire entier avec les pt du réseau )
 - inégalité plus générale sur les gaussiennes (pour une gaussienne de parametre s, proba que le vecteur soit >= s*t est inférieur à exp(-\pi*t^2) )
 - introduction du smoothing parameter (qui permet d'avoir certaines ptés de la gausienne discrete sur la gausienne continue)
@@ -34,12 +34,20 @@
 - on peut construire des réseaux avec des coefs dans un anneau de polynome (typiquement, Z[X]/(X**n+1) ) pour avoir des multiplication un peu plus efficace. Malheureusement, certains problèmes standards sur les réseaux n'ont pas été prouvés comme durs ( voir présentation n°6)
 
 ** 3 - How to Use a Short Basis: Trapdoors for Hard Lattices and New Cryptographic Constructions - Gentry, Peikert et Vaikuntanathan ( https://eprint.iacr.org/2007/432.pdf )
+L'article présente un moyen efficace d'echantillonner la gaussienne discrete sur n'importe quel réseau, et utilise le fait qu'on puisse generer une matrice uniforme et une trappe (voir cours n°2) pour construire plusieurs primitives cryptographiques dont un IBE et un systeme de chiffrement reposant sur LWE et pouant avoir des clés "messy".
 - découverte de la notion d'IBE ( un systeme où une clé publique permet d'encrypter un message pour tout le monde, et une clé secrete permet de generer une clé secrete pour chaque utilisateur )
-- l'article explique comment échantillonner la gausienne discrete sur Z ( en sachant qu'avec une proba de type 1-negl, l'echantillon est dans [c-s*log(n),c+log(n)], on peut appliquer ue méthode de rejet sur cet intervalle pour obtenir un echantillon gaussien)
+- l'article explique comment échantillonner la gausienne discrete sur Z ( en sachant qu'avec une proba de type 1-negl, l'echantillon est dans [c-s*\omega(sqrt(log(n))),c+\omega(sqrt(log(n)))], on peut appliquer ue méthode de rejet sur cet intervalle pour obtenir un echantillon gaussien)
 - à l'aide de cette gausienne, on peut echantillonner celle sur un réseau quelconque ( il s'agit d'une méthode utilisant les vecteurs de Gramm-Schmitt de la base )
-- 
+- formules entre \Lambda et \Lambda_\bot (vue en TD du cours n° 2)
+- on retrouve dans l'article la fonction de hachage présentée dans le cours n°1
+- on retrouve le chiffrement dual Regev
+- présentation d'un IBE basé sur le chiffrement dual Regev utilisant à la fois les trappes et l'echantillonage sur une gausienne discrete ( la clé publique est A, ca clé privée est une trappe, pour générer une clé privée pour une identité id, on prend un vecteur u=H(id) et on trouve un vecteur e tq Ae = u mod q et tel que e est court, ce qui ets possible car on peut générer la gaussienne de \Lambda_\bot grace à la trappe)
+- présentation d'un systeme de chiffrement dont la sécurité repose sur LWE ( clé secrete : s uniforme, clé publique : p = A^Ts+x ou x est gaussien, pour encrypter, on choisi e gaussien de Z^m et on retourne (Ae,p^Te+M*floor(q/2)) )
+- définition de clés "messy" (clés pour lequels les chiffrés sont indistingables de vecteurs choisis uniformément )
+- présentation d'un algorithme permettant d'indentifier si une clé est "messy" avec une probabilité exponnentiellement faible pour l'algorithme basé sur LWE
+- La réduction de SIVP à SIS du cours n°2 est présentée de manière plus détaillée en fin d'article ( comme une bonne partie des algorithmes présentés, cette réduction utilise l'algorithme d'echantillonage de la gaussienne sur les réseaux)
 
-** 4 - Proving Hardness of LWE - Regev ( présentation d'article en vidéo : https://www.youtube.com/watch?v=Z4DM3qhH6pA et  https://people.csail.mit.edu/vinodv/6892-Fall2013/regev.pdf )
+** 4 - Proving Hardness of LWE - Regev ( présentation d'article en vidéo : https://www.youtube.com/watch?v=Z4DM3qhH6pA et https://people.csail.mit.edu/vinodv/6892-Fall2013/regev.pdf )
 
 ** 5 - The Mathematics of Latices - Vaikuntanathan ( https://www.youtube.com/watch?v=LlPXfy6bKIY et https://www.youtube.com/watch?v=SZkTJMorxnM ) 
 
