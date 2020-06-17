@@ -36,9 +36,9 @@
 ** 3 - How to Use a Short Basis: Trapdoors for Hard Lattices and New Cryptographic Constructions - Gentry, Peikert et Vaikuntanathan ( https://eprint.iacr.org/2007/432.pdf )
 L'article présente un moyen efficace échantillonner la gaussienne discrète sur n'importe quel réseau, et utilise le fait qu'on puisse générer une matrice uniforme et une trappe (voir cours n°2) pour construire plusieurs primitives cryptographiques dont un IBE et un système de chiffrement reposant sur LWE et pouvant posséder des clés "messy".
 - découverte de la notion d'IBE ( un système où une clé publique permet d'encrypter un message pour tout le monde, et une clé secrète  "maitresse" permet de générer une clé secrète pour chaque utilisateur )
-- l'article explique comment échantillonner la gaussienne discrète sur Z ( en sachant qu'avec une proba de type 1-negl, l’échantillon est dans [c-s*\omega(sqrt(log(n))),c+\omega(sqrt(log(n)))], on peut appliquer une méthode de rejet sur cet intervalle pour obtenir un échantillon gaussien)
+- l'article explique comment échantillonner la gaussienne discrète sur $\mathbb{Z}$ ( en sachant qu'avec une proba de type 1-negl, l’échantillon est dans [c-s*\omega(sqrt(log(n))),c+\omega(sqrt(log(n)))], on peut appliquer une méthode de rejet sur cet intervalle pour obtenir un échantillon gaussien)
 - à l'aide de cette gaussienne, on peut échantillonner celle sur un réseau quelconque ( il s'agit d'une méthode utilisant les vecteurs de Gramm-Schmitt de la base )
-- formules entre \Lambda et \Lambda_\bot (vue en TD du cours n° 2)
+- formules entre \Lambda et \Lambda_\bot (vues en TD du cours n° 2)
 - on retrouve dans l'article la fonction de hachage présentée dans le cours n°1
 - on retrouve le chiffrement dual Regev
 - présentation d'un IBE basé sur le chiffrement dual Regev utilisant à la fois les trappes et échantillonnage sur une gaussienne discrète ( la clé publique est A, ca clé privée est une trappe, pour générer une clé privée pour une identité id, on prend un vecteur u=H(id) et on trouve un vecteur e tq Ae = u mod q et tel que e est court, ce qui ets possible car on peut générer la gaussienne de \Lambda_\bot grâce à la trappe)
@@ -48,6 +48,11 @@ L'article présente un moyen efficace échantillonner la gaussienne discrète su
 - La réduction de SIVP à SIS du cours n°2 est présentée de manière plus détaillée en fin d'article ( comme une bonne partie des algorithmes présentés, cette réduction utilise l'algorithme échantillonnage de la gaussienne sur les réseaux)
 
 ** 4 - Proving Hardness of LWE - Regev ( présentation d'article en vidéo : https://www.youtube.com/watch?v=Z4DM3qhH6pA et https://people.csail.mit.edu/vinodv/6892-Fall2013/regev.pdf )
+J'ai regardé la vidéo et j'ai lu l'intro de l'article. Dans sa présentation, Regev détaille un algorithme ayant acces à un oracle de LWE pour trouver un vecteur cours d'un réseau (et donc cela permet de résoudre des problèmes classiques de réseaux, par exemple SVP ).
+- découverte du problème BDD, quiselon Regev n'a de l'utilité qu'en info quantique ( étant un vecteur "proche" d'un point du réseau, trouver le point du réseau le plus proche )
+- l'algo présenté repose sur la proposition suivante : avec un échantillon de taille poly(n) de vecteurs échantillonnés sur une gausienne de parametre r, je peux échantillonner un autre échantillon de même taille de parametre r/2 à l'aide de LWE. Pour réaliser ca, Regev présente 2 lemmes.
+- lemme 2: étant donné un oracle qui résout BDD_d, je peux sampler la gaussienne de parametre sqrt(n)/d ( vu que c'est quantique, je comprend pas tres bien, mais l'idée est de calculer la fonction f_{d/srqt(n)} (celle qui fait des gausiennes sur les points du dual) de manière quantique, en elevant un état qui nous gene en "décalculant" les points du dual avec BDD, et ensuite on fait une transformée de fourier pour trouver la distribution gausienne de parametre sqrt(n)/d)
+- lemme 1: étant donné un oracle qui résout LWE et des echantillons gaussiens du réseau de parametre r, je peux résoudre $BDD_{p/r}$ (l'idée est que à l'aide de f_{p/r}, on peut faire une descente de gradient et trouver le point le plus proche en remontant la colline formée par la gausienne. Pour p=1, il s'agit juste d'un calcul d'esperance et f_{1/r} est trouvable facilement.
 
 ** 5 - The Mathematics of Latices - Vaikuntanathan ( https://www.youtube.com/watch?v=LlPXfy6bKIY et https://www.youtube.com/watch?v=SZkTJMorxnM ) 
 
