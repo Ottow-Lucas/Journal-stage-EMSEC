@@ -5,7 +5,7 @@
 - notion de sécurité CCA (l'attaquant, en pouvant décoder des messages autre que le challenge, ne peut pas savoir d'informations non négligeable sur le message d'origine)
 - gaussienne discrète sur Z et le fait que les valeurs sont presque toutes de norme faible (pour une gaussienne de paramètre s, autour de s*sqrt(n) )
 - découverte du problème LWE calculatoire et décisionnel (on a m produits scalaires avec un vecteur secret s de Z^{n}, les produits sont brouillés par une gaussienne discrete)
-- découverte d'un chiffrement reposant sur LWE ( en recevant (A,b) en clé publique, on échantillonne r avec des valeurs 0 ou 1 puis on renvoie (r^{T}A,r^{T}b+floor(q/2)*M) )
+- découverte d'un chiffrement reposant sur LWE (chiffrement de Regev) ( en recevant (A,b) en clé publique, on échantillonne r avec des valeurs 0 ou 1 puis on renvoie (r^{T}A,r^{T}b+floor(q/2)*M) )
 - énoncé du Leftover Hash Lemma (si une matrice et un vecteur sont choisis de manière uniforme, leur produit est a distance négligeable de la distribution uniforme)
 - notion de résistance aux collisions (un adversaire ne peut pas renvoyer une collision pour la fonction de hash avec une proba non négligeable )
 - découverte du problème SIS ( pour une matrice a coefficients entier, trouver un vecteur petit de \Lambda_{\bot} (A) )
@@ -29,7 +29,7 @@
 - il existe une réduction quantique de GapSVP à LWE ( voir présentation n°4 )
 - découverte du chiffrement dual Regev (au lieu que la clé privée est r (coef dans 0 et 1) et la clé publique est y =r^{T}A  mod q (donc la clé secrète n'est plus s) 
 - définition d'une trappe pour les problèmes de réseau (base courte de \Lambda_{q}^{\bot}(A), avec laquelle on peut résoudre beaucoup de problèmes compliqués facilement et échantillonner la gaussienne avec un paramètre petit ) (voir papier n°3)
-- il est possible de générer une trappe en même temps qu'une matrice, et de faire en sorte que la matrice soit proche de l'uniforme
+- présentation d'un algorithme permettant de générer une trappe en même temps qu'une matrice, et de faire en sorte que la matrice soit proche de l'uniforme 
 - découverte du schéma de signature GPV, dont la sécurité repose sur SIS ( utiliser une trappe pour générer un vecteur avec une certaine propriété (compliqué à faire sans la trappe), pour vérifier, on a juste à vérifier si le vecteur respecte la bonne pté )
 - on peut construire des réseaux avec des coefs dans un anneau de polynôme (typiquement, Z[X]/(X^{n}+1) ) pour avoir des multiplication un peu plus efficace. Malheureusement, certains problèmes standards sur les réseaux n'ont pas été prouvés comme durs ( voir présentation n°6)
 
@@ -53,9 +53,19 @@ J'ai regardé la vidéo et j'ai lu l'intro de l'article. Dans sa présentation, 
 - l'algo présenté repose sur la proposition suivante : avec un échantillon de taille poly(n) de vecteurs échantillonnés sur une gaussienne de paramètre r, je peux échantillonner un autre échantillon de même taille de paramètre r/2 à l'aide de LWE. Pour réaliser ca, Regev présente 2 lemmes.
 - lemme 2: étant donné un oracle qui résout BDD_{d}, je peux sampler la gaussienne de paramètre sqrt(n)/d ( vu que c'est quantique, je comprend pas très bien, mais l'idée est de calculer la fonction f_{d/srqt(n)} (celle qui fait des gaussiennes sur les points du dual) de manière quantique, en enlevant un état qui nous gène en "enlevant" les points du dual de l’état avec BDD, et ensuite on fait une transformée de fourrier quantique pour trouver la distribution gaussienne de paramètre sqrt(n)/d)
 - lemme 1: étant donné un oracle qui résout LWE et des échantillons gaussiens du réseau de paramètre r, je peux résoudre BDD_{p/r} (l'idée est que à l'aide de f_{p/r}, on peut faire une descente de gradient et trouver le point le plus proche en remontant la colline formée par la gaussienne. Pour p=1, il s'agit juste d'un calcul d’espérance et f_{1/r} est trouvable facilement. Ça se complique pour p>=2; on divise le réseau en p^{n} sous réseaux et à partir des échantillons de la gaussiennes, on peut avoir des échantillons sur la proba marginale ou l'on choisi d'abord le sous réseau puis on fait une gaussienne dessus. Ensuite, selon dans quel sous réseau les échantillons sont pris, les pics de f peuvent êtres inversés. Pour trouver dans quel sens renverser la gaussienne, on peut utiliser <s,t> mod p pour chaque échantillon ou t est le vecteur qui correspond au sous réseau d'on proviens l’échantillon et s dépend de x uniquement. Avec des erreurs, cela correspond à <x,w> mod p où x est le point auquel on essaye d'approcher la fonction et w est un échantillon. On peut donc utiliser LWE pour trouver s et redresser les gaussiennes. )
-J'ai toujours une certaine interrogations à propos du lemme 2. Pourquoi a t on besoin de connaître <s,t> mod p pour corriger la valeur d'un échantillon? Je suis sur que c'est complètement faux, mais je ne comprend pas pourquoi on ne pourrait pas juste prendre l’espérance des valeurs absolues, au lieu de faire l’espérance simple. Peut être que le fait de n'avoir qu'un échantillon par sous réseaux fait que ce n'est pas possible?...
+J'ai toujours une certaine interrogation à propos du lemme 2. Pourquoi a t on besoin de connaître <s,t> mod p pour corriger la valeur d'un échantillon? Je suis sur que c'est complètement faux, mais je ne comprend pas pourquoi on ne pourrait pas juste prendre l’espérance des valeurs absolues, au lieu de faire l’espérance simple. Peut être que le fait de n'avoir qu'un échantillon par sous réseaux fait que ce n'est pas possible?...
 
 ** 5 - The Mathematics of Latices - Vaikuntanathan ( https://www.youtube.com/watch?v=LlPXfy6bKIY et https://www.youtube.com/watch?v=SZkTJMorxnM ) 
+- rappel de quelques bases et généralités sur les réseaux et de certains problèmes sur les réseaux
+- résumé des différentes complexités pour le problème GapSVP selon \gamma (présent dans le cours n°2 )
+- on y retrouve la fonction de hash du cours n°1
+- on y retrouve également la réduction de SIVP à SIS du cours n°2
+- présentation d'une fonction de hash reposant sur LWE ( en prenant (s,e) avec e petit, g_{A}(s,e)=As+e ) et de la fonction de hash reposant sur SIS (du cours n°1)
+- le chiffrement de Regev du cours n°1 est présenté
+- présentation de l'algorithme de Babai qui permet de résoudre CVP si on a une bonne base pour un réseau (étant donné un vecteur y et la base du réseau B, on renvoie v = B.int(B^{-1}y). On a alors v sur le réseau et ||v-y|| <= 1/2*||B|| où ||B|| = \Sigma b_{i} )
+- présentation d'algorithmes pour utiliser les trapes pour inverser les fonctions de hash présentées à l'aide de l'algorithme de Babai
+- l'algorithme de génération de matrice avec la trappe est présenté (algo présent dans le cours n°2 )
+Globalement, cette présentation ne m'a pas appris autant de chose que les documents précédents, mais elle m'a permit de mieux comprendre certaines notions (notamment la réduction de SIVP à SIS, qui était bien expliquée et illustrée). J'ai également pu découvrir l'algorithme de Babai de manière explicite, ce que je trouve plutôt intéressant. 
 
 ** 6 - Présentation sur Ring-LWE - Lyubashevsky ( https://www.youtube.com/watch?v=okJwRM0Yu7E )
 
