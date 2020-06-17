@@ -65,10 +65,26 @@ J'ai toujours une certaine interrogation à propos du lemme 2. Pourquoi a t on b
 - présentation de l'algorithme de Babai qui permet de résoudre CVP si on a une bonne base pour un réseau (étant donné un vecteur y et la base du réseau B, on renvoie v = B.int(B^{-1}y). On a alors v sur le réseau et ||v-y|| <= 1/2*||B|| où ||B|| = \Sigma b_{i} )
 - présentation d'algorithmes pour utiliser les trapes pour inverser les fonctions de hash présentées à l'aide de l'algorithme de Babai
 - l'algorithme de génération de matrice avec la trappe est présenté (algo présent dans le cours n°2 )
-Globalement, cette présentation ne m'a pas appris autant de chose que les documents précédents, mais elle m'a permit de mieux comprendre certaines notions (notamment la réduction de SIVP à SIS, qui était bien expliquée et illustrée). J'ai également pu découvrir l'algorithme de Babai de manière explicite, ce que je trouve plutôt intéressant. 
+Globalement, cette présentation ne m'a pas appris autant de chose que les documents précédents, mais elle m'a permit de mieux comprendre certaines notions (notamment la réduction de SIVP à SIS, qui était bien expliquée et illustrée). J'ai également pu découvrir l'algorithme de Babai de manière explicite. 
 
 ** 6 - Présentation sur Ring-LWE - Lyubashevsky ( https://www.youtube.com/watch?v=okJwRM0Yu7E )
+Comme son nom l'indique, cette présentation m'a servi d'introduction aux réseaux reposants sur d'autres anneaux que les Z^{n}.
+La présentation introduit les réseaux dans d'autres espaces que Z^{n}, par exemple les réseaux cycliques ( dans Z[X]/(X^{n}-1 ) ) et idéaux
+- définition d'un réseau f-idéal ( réseau dans Z[X]/f(X) où f est de coefficient dominant 1, irréductible, et il existe poly(n) tq pour tout polynômes g et h, on doit avoir ||gh mod f|| <= poly(n)*||f||*||g|| )
+- les f tq f=X^{n}+1 où n est une puissance de 2 sont les plus utilisés
+- on ne sait pas grand chose de la difficulté des problèmes de réseaux classiques adaptés aux réseaux idéaux, sauf que GapSVP est facile à résoudre à partir de \gamma = sqrt(n)
+- définition de ring LWE, équivalent de LWE dans les réseaux idéaux (on prend a_{1}, ..., a_{n} dans, s dans l'anneau de manière uniforme, et e_{1}, ..., e_{n} gaussiens dans l'anneau, et le pb porte sur les (a_{i},a_{i}*s+e_{i}) )
+- on peut montrer (apparemment de manière similaire à Regev à le présentation 4, mais je sais pas comment) que search ring LWE est dur (ie on peut résoudre des problèmes sur les réseaux avec un oracle résolvant ce problème)
+- il existe une réduction de search ring LWE à decision ring LWE ( la démo est similaire à la même réduction dans les réseaux classiques; on devine les coefs un à un )
 
 ** 7 - Lattice-based Cryptography - Micciancio et Regev ( https://cseweb.ucsd.edu/~daniele/papers/PostQuantum.pdf )
+Cette article liste un bon nombre de schémas cryptographiques reposant sur les réseaux euclidiens et fait la distinction entre ceux n'ayant pas de preuve de sécrité mais étant efficaces, et ceux prouvés comme surs mais étant moins efficaces voire inutilisables en pratique.
+- l'article présente la focntion de hash du cours n°1. Elle a été inventée par Ajtai.
+- Comme cette fonction n'est pas tres efficace à calculer, plusieurs propositions visent à ameliorer la complexité asymptotique ( première idée : matrices circulantes s'apparentant à de la multiplication sur Z[X]/(X^{n}-1) mais moins de preuves de sécurité. par contre, les matrices s'apparentant à de la multiplication sur Z[X]/(X^{n}+1) ont une preuve de sécurité reposant sur SVP sur les réseaux idéaux, et on peut utiliser la FFT pour optimiser le calcul de la fonction et la clé publique est moins lourde)
+- présentation de l'algrithme d'encryption NTRU, non prouvé sûr mais jamais cassé ( l'algorithme utilise les réseaux idéaux, est un peu plus complexe à comprendre que d'habitude et est assez particulier, mais les clé privées et publiques sont assez légères (seulement un ou deux vecteurs de Z_{q}^{n} ) et les algorithmes d'encryptions et de décryptions sont plutot efficaces )
+- Le papier détaille un des schéma de chiffrement les plus eficaces ayant une preuve de sécurité, il est basé sur LWE ( clé publique: matrice S choisie au hasard, clé publique: (A,P=AS+E) ou A est prise au hasard et E matrice de coef gaussien. Pour encrypter, (u=A^{T}a,c=P^{T}a+f(v)). Pour decrypter, f^{-1}(c-S^{T}u). f(x)=q/t*int(x) )
+- Cet algorithme requiert beaucoup de parametres, mais une fois les bons parametres choisis, l'algorithme peut etre prouvé comme sécurisé et peut avoir des clés "messy" (voir article n°3 pour plus d'info )
+partie 6
+
 
 ** 8 - Robustness of the Learning with Errors Assumption - Goldwasser, Kalai, Peikert et Vaikuntanathan ( https://web.eecs.umich.edu/~cpeikert/pubs/robustlwe.pdf )
