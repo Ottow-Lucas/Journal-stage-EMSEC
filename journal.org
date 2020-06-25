@@ -10,4 +10,4 @@ Mon but est d'améliorer la preuve de "blindness" du protocole de signature aveu
 
 - Pour réaliser la combinaison linéaire que je veux, je pense fortement qu'il faudrait trouver une condition sur l’écart-type et sur les coefficients de la combinaison linéaire. Si on a un coefficient multiplicatif trop grand \lamba et deux variables aléatoires X et Y identiques, j'ai l'impression que la loi résultante X+\lambda.Y pourrait ressembler à plusieurs petites gaussiennes centrées autour des valeurs que pendrait une grosse gaussienne (X étant la petite gaussienne, \lambda.Y étant la grosse gaussienne ). Voir photo "intuition combinaison linéaire" pour un exemple ( pas très rigoureux )
 
-- Résultat plutôt facile à montrer. Pour \Lambda réseau, \mu \in Z, si X suit la loi D_{\Lambda,s,c}, \mu.X sui la loi D_{\mu \Lambda,|\mu|s,\mu c}
+- Résultat plutôt facile à montrer. Pour \Lambda réseau, \mu \in Z, si X suit la loi D_{\Lambda,s,c}, \mu.X suit la loi D_{\mu \Lambda,|\mu|s,\mu c}
