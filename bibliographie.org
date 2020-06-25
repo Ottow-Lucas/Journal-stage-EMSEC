@@ -114,6 +114,6 @@ Cet article propose une signature aveugle basée sur SIS plus efficace que celle
 
 ** 10 - Hardness of LWE on General Entropic Distributions - Brakerski et Döttling ( https://www.youtube.com/watch?v=A3nJo3MRKjA et https://eprint.iacr.org/2020/119.pdf )
 Ce papier vient améliorer la réduction de l'article n°8, notamment le rapport entre l’écart-type des deux problèmes ( ce qui permet donc d'avoir une réduction plus "forte" ). Pour réaliser cette preuve, les auteurs décompose l'erreur gaussienne en une combinaison linéaire e_{1}F+e_{2}. 
-- Dans l'article, on trouve le résultat suivant sur des gaussiennes CONTINUES : Si on prend F une matrice a coefficients entiers, \sigma > \sigma_{1}. Alors pour e vecteur de R^{m} est distribué selon une gaussienne d’écart-type \sigma, elle est de même loi que e_{1}F+e_{2} où F est fixé arbitrairement dans Z^{n.m}, e_{1} suit une distribution gaussienne d’écart-type \sigma_{1} et e_{2} suit une distribution gaussienne d’écart-type sqrt(\Sigma) où \Sigma=\sigma^{2}I-\sigma_{1}^{2}F^{T}F .
+- Dans l'article, on trouve le résultat suivant sur des gaussiennes CONTINUES : Si on prend F une matrice a coefficients entiers, \sigma > \sigma_{1}.|||F|||. Alors pour e vecteur de R^{m} est distribué selon une gaussienne d’écart-type \sigma, elle est de même loi que e_{1}F+e_{2} où F est fixé arbitrairement dans Z^{n.m}, e_{1} suit une distribution gaussienne d’écart-type \sigma_{1} dans R^{n} et e_{2} suit une distribution gaussienne d’écart-type sqrt(\Sigma) dans R^{m} où \Sigma=\sigma^{2}I-\sigma_{1}^{2}F^{T}F .
 - 
 
