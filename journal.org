@@ -1,11 +1,13 @@
 Mon but est d'améliorer la preuve de "blindness" du protocole de signature aveugle présenté dans l'article n°9, en utilisant une des méthodes présenté dans l'article n°10, qui consiste à transformer une variable aléatoire gaussienne continue e en une combinaison linéaire de deux autres gaussienne e_{1}F+e_{2}.
 
-** Adaptation du "lemme de décomposition" pour les gaussiennes discretes
+** Adaptation du "lemme de décomposition" pour les gaussiennes discrètes
 
-- Dans l'article n°9, les gausiennes utilisées sont toutes discrette selon l'anneau R, alors que l'erreur de LWE dans l'article n°10 est une gausienne continue, ce qui est bien plus simple pour prouver que l'on peut bien décomposer e. Il faut donc que je réussisse à traduire ce lemme au moins pour des Gausiennes sur Z. 
+- Dans l'article n°9, les gaussiennes utilisées sont toutes discrète selon l'anneau R, alors que l'erreur de LWE dans l'article n°10 est une gaussienne continue, ce qui est bien plus simple pour prouver que l'on peut bien décomposer e. Il faut donc que je réussisse à traduire ce lemme au moins pour des gaussiennes sur Z. 
 
-- Pour prouver ce résultat
+- Pour prouver ce résultat, puisque que l'on sait que sous certaines condition la somme de deux vecteurs gaussiens discret et un vecteur gaussien est discret, il me suffirait de prouver qu'en multipliant un vecteur gaussien discret par une matrice à coefficients dans Z, on obtient encore un vecteur gaussien discret.
 
-- J'ai l'intuition qu'il faudrait au moins avoir des hypothèses plus fortes pour réaliser la décomposition; d'après le cours n°2 on peut additionner deux gausiennes discrettes SUR LE MEME RESEAU ( si l'ecart-type est plus grand que le smoothing parameter ), un résultat similaire avec des combinaison linéaire plus dur à obtenir ( et donc pouvoir dire que la multiplication d'une gaussienne discrete par une matrice est toujours une gausienne discrete ).
+- Je pense qu'il faudrait au moins avoir des hypothèses plus fortes pour réaliser la décomposition; d'après le cours n°2 on peut additionner deux gaussiennes discrètes SUR LE MÊME RÉSEAU ( si l’écart-type est plus grand que le smoothing parameter ), un résultat similaire avec des combinaison linéaire plus dur à obtenir ( et donc pouvoir dire que la multiplication d'une gaussienne discrète par une matrice est toujours une gaussienne discrète ).
 
-- Résultat plutôt facile à montrer. Pour \Lambda réseau, \mu \in Z, si X suit la loi D_{\Lambda,s,c}, \muX sui la loi D_{\mu\Lambda,|\mu|s,\muc}
+- Pour réaliser la combinaison linéaire que je veux, je pense fortement qu'il faudrait trouver une condition sur l’écart-type et sur les coefficients de la combinaison linéaire. Si on a un coefficient multiplicatif trop grand \lamba et deux variables aléatoires X et Y identiques, j'ai l'impression que la loi résultante X+\lambda Y pourrait ressembler à plusieurs petites gaussiennes centrées autour des valeurs que pendrait une grosse gaussienne (X étant la petite gaussienne, \lambda Y étant la grosse gaussienne ). Voir photo "intuition combinaison linéaire" pour un exemple ( pas très rigoureux )
+
+- Résultat plutôt facile à montrer. Pour \Lambda réseau, \mu \in Z, si X suit la loi D_{\Lambda,s,c}, \mu X sui la loi D_{\mu \Lambda,|\mu|s,\mu c}
