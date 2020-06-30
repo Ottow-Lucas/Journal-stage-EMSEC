@@ -11,3 +11,13 @@ Mon but est d'améliorer la preuve de "blindness" du protocole de signature aveu
 - Pour réaliser la combinaison linéaire que je veux, je pense fortement qu'il faudrait trouver une condition sur l’écart-type et sur les coefficients de la combinaison linéaire. Si on a un coefficient multiplicatif trop grand \lamba et deux variables aléatoires X et Y identiques, j'ai l'impression que la loi résultante X+\lambda.Y pourrait ressembler à plusieurs petites gaussiennes centrées autour des valeurs que pendrait une grosse gaussienne (X étant la petite gaussienne, \lambda.Y étant la grosse gaussienne ). Voir photo "intuition combinaison linéaire" pour un exemple ( pas très rigoureux )
 
 - Résultat plutôt facile à montrer. Pour \Lambda réseau, \mu \in Z, si X suit la loi D_{\Lambda,s,c}, \mu.X suit la loi D_{\mu \Lambda,|\mu|s,\mu c}
+
+** Entropie min conditionnelle
+
+- Dans l'article n°10, la condition de difficulté de la version "entropique" de LWE est une condition sur l'entropie min conditionelle. La quantité H_{oo}(X|Y) mesure l'information gagnée sur X en sachant Y. 
+
+- l'entropie min conditionelle nous donne une borne sur la proba d'un adversaire PPT de trouver la valeur de X sachant celle de Y. Dans la preuve l'article n°10, on borne P(Att(sA+e)=s) par 2^{-H_{oo}(s|A,sA+e)} où Att est un adversaire PPT essayant de trouver s.
+
+- de la même manière, je pourrais peut etre prouver que pour n'importe quel attaquant Att PPT, la probabilité que Att trouve z sachant z^{\*} est négligeable. Pour cela il faudrait que H_{oo}(z|z^{\*}) = H_{oo}(z|z+t_{2}) = \omega (log(n))
+
+
