@@ -20,7 +20,7 @@ Mon but est d'améliorer la preuve de "blindness" du protocole de signature aveu
 
 - l'entropie min conditionnelle nous donne une borne sur la proba d'un adversaire PPT de trouver la valeur de X sachant celle de Y. Dans la preuve l'article n°10, on borne P(Att(sA+e)=s) par 2^{-H_{oo}(s|A,sA+e)} où Att est un adversaire PPT essayant de trouver s.
 
-- de la même manière, je pourrais peut etre prouver que pour n'importe quel attaquant Att PPT, la probabilité que Att trouve z sachant z^{*} est négligeable. Pour cela il faudrait que H_{oo}(z|z^{*}) = H_{oo}(z|z+t_{2}) = \omega (log(n))
+- de la même manière, je pourrais peut etre prouver que pour n'importe quel attaquant Att PPT, la probabilité que Att trouve z sachant z^{et} est négligeable. Pour cela il faudrait que H_{oo}(z|z^{et}) = H_{oo}(z|z+t_{2}) = \omega (log(n))
 
 - Cependant, je ne comprends pas la définition exacte de l'entropie-min conditionelle et je ne comprends pas tellement pourquoi cela implique une borne sur l'avantage d'un attaquant.
 
